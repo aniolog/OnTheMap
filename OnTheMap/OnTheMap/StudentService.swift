@@ -20,10 +20,10 @@ class StudentService {
     }
     
     
-    func getStudentsPosition(limit: Int, completionHandler: @escaping (_ studentsList:[Student]?, _ error: NSError? ) ->Void){
+    func getStudentsPosition(handler completionHandler: @escaping (_ studentsList:[Student]?, _ error: NSError? ) ->Void)->Void{
         
         let parameters = [
-            Client.requestConstants.parseUrlParamKeys.limit : String(limit) as AnyObject]
+            Client.requestConstants.parseUrlParamKeys.limit : "100" as AnyObject]
         
         let headers = [
             Client.requestConstants.headersKeys.parse.apiKey : Client.requestConstants.headersValues.parse.apiKey,
@@ -46,7 +46,14 @@ class StudentService {
                             var students: [Student] = [Student]()
                             
                             for studentDict in results{
-                                students.append(Student(studentData: studentDict))
+                              
+                                print(studentDict[Client.jsonKeys.studentkeys.latitude])
+                                if !(studentDict[Client.jsonKeys.studentkeys.latitude] is NSNull)
+                                {
+                                    if !(studentDict[Client.jsonKeys.studentkeys.latitude] is NSNull){
+                                           students.append(Student(studentData: studentDict))
+                                    }
+                                }
                             }
                             completionHandler(students, nil)
                         }

@@ -21,10 +21,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("hola")
-        studentService?.getStudentsPosition(limit: 10){
-            (students, error) in
-            print(students)
-        }
+
     }
 
 }

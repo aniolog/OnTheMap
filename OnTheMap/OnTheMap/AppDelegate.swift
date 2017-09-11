@@ -13,7 +13,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var students:[Student]?
+    
+    var service:StudentService?
 
+    
+    func loadStudents(completionHandler: @escaping ([Student]?,NSError?)->Void){
+       service = StudentService()
+       service?.getStudentsPosition(){
+            (students,error) in
+            self.students = students
+            completionHandler(students,error)
+        
+        }
+    
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true
