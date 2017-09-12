@@ -25,26 +25,14 @@ class MapViewController: UIViewController,MKMapViewDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        delegate.loadStudents(){
-            (students, error) in
-            DispatchQueue.main.async {
-                if error != nil{
-                   let alert = UIAlertController(title: "Download failed", message:
-                    "the app failed to download the first 100 student", preferredStyle: .alert)
-                    let dismissAction = UIAlertAction(title: "Got it", style: .default){ action in}
-                    alert.addAction(dismissAction)
-                    self.present(alert, animated: true, completion: nil)
-                }else{
-                    self.students = students!
-                    for student in self.students{
-                        print(student.latitude)
-                        if student.latitude != nil && student.longitude != nil{
-                            self.map.addAnnotation(OTMAnnotation(latitude: student.latitude!,longitude: student.longitude!,student: student))
-                        }
-                    }
-                }
-            }
+        guard let studentsData:[Student] = delegate.students, delegate.students != nil else{
+            loadAllStudents()
+            return
         }
+        self.students = studentsData
+        self.createAllStudentAnnotations(self.students)
+
+        
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -78,6 +66,36 @@ class MapViewController: UIViewController,MKMapViewDelegate {
         UIApplication.shared.openURL(URL(string: sender.url!)!)
     }
     
+    func createAllStudentAnnotations(_ students:[Student]){
+        for student in students{
+            if student.latitude != nil && student.longitude != nil{
+                self.map.addAnnotation(OTMAnnotation(latitude: student.latitude!,longitude: student.longitude!,student: student))
+            }
+        }
+    
+    }
+    
+    
+    func loadAllStudents(){
+        self.map.removeAnnotations(self.map.annotations)
+        delegate.loadStudents(){
+            (students, error) in
+            DispatchQueue.main.async {
+                if error != nil{
+                    let alert = UIAlertController(title: "Download failed", message:
+                        "the app failed to download the first 100 student", preferredStyle: .alert)
+                    let dismissAction = UIAlertAction(title: "Got it", style: .default){ action in}
+                    alert.addAction(dismissAction)
+                    self.present(alert, animated: true, completion: nil)
+                }else{
+                    self.students = students!
+                    self.createAllStudentAnnotations(self.students)
+                    
+                }
+            }
+        }
+    
+    }
     
     
 }

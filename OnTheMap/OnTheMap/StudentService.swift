@@ -23,7 +23,12 @@ class StudentService {
     func getStudentsPosition(handler completionHandler: @escaping (_ studentsList:[Student]?, _ error: NSError? ) ->Void)->Void{
         
         let parameters = [
-            Client.requestConstants.parseUrlParamKeys.limit : "100" as AnyObject]
+            Client.requestConstants.parseUrlParamKeys.limit : "100" as AnyObject,
+            Client.requestConstants.parseUrlParamKeys.orderBy: "-\(Client.jsonKeys.studentkeys.createdAt)" as AnyObject
+        
+        ]
+        
+        print(parameters)
         
         let headers = [
             Client.requestConstants.headersKeys.parse.apiKey : Client.requestConstants.headersValues.parse.apiKey,
@@ -47,7 +52,6 @@ class StudentService {
                             
                             for studentDict in results{
                               
-                                print(studentDict[Client.jsonKeys.studentkeys.latitude])
                                 if !(studentDict[Client.jsonKeys.studentkeys.latitude] is NSNull)
                                 {
                                     if !(studentDict[Client.jsonKeys.studentkeys.latitude] is NSNull){
