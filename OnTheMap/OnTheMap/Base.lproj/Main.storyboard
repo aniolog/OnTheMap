@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ezq-Lb-P48">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,18 +19,18 @@
                         <viewControllerLayoutGuide type="bottom" id="Cra-qP-maG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8Qn-mv-c2g">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bqv-3V-lzH">
-                                <rect key="frame" x="16" y="64" width="343" height="554"/>
+                                <rect key="frame" x="16" y="64" width="288" height="455"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="58" id="ReG-0B-ulD" customClass="OTMTableViewCell" customModule="OnTheMap" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="343" height="58"/>
+                                        <rect key="frame" x="0.0" y="28" width="288" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ReG-0B-ulD" id="jad-GX-N6G">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="58"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="57.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -67,11 +67,11 @@
                         <viewControllerLayoutGuide type="bottom" id="B0L-0k-c13"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="j7E-WH-FMH">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="x6D-f4-1PK">
-                                <rect key="frame" x="16" y="64" width="343" height="554"/>
+                                <rect key="frame" x="16" y="64" width="288" height="455"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -109,11 +109,74 @@
             </objects>
             <point key="canvasLocation" x="11" y="619"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="BKT-6b-HjY">
+            <objects>
+                <viewController id="hGd-HB-Q1m" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="D6L-ud-uoe"/>
+                        <viewControllerLayoutGuide type="bottom" id="w01-xX-SPa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uHo-Fj-Z0E">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-u" translatesAutoresizingMaskIntoConstraints="NO" id="pu2-Q3-F3H">
+                                <rect key="frame" x="83" y="93" width="154" height="62"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oh4-fx-OUE">
+                                <rect key="frame" x="24" y="216" width="272" height="39"/>
+                                <color key="backgroundColor" red="0.011744336225092411" green="0.70667880773544312" blue="0.89767259359359741" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39" id="JaD-Cg-TD6"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KWF-um-eJM">
+                                <rect key="frame" x="24" y="287" width="272" height="39"/>
+                                <color key="backgroundColor" red="0.013374958189999999" green="0.70280927419999994" blue="0.89374011750000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39" id="37Y-3k-Teg"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mOz-uk-2gB">
+                                <rect key="frame" x="131.5" y="359" width="57" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" red="0.013374958189999999" green="0.70280927419999994" blue="0.89374011750000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pu2-Q3-F3H" firstAttribute="top" secondItem="D6L-ud-uoe" secondAttribute="bottom" constant="73" id="3n9-tw-9m8"/>
+                            <constraint firstItem="oh4-fx-OUE" firstAttribute="leading" secondItem="uHo-Fj-Z0E" secondAttribute="leadingMargin" constant="8" id="BI6-Eh-VSG"/>
+                            <constraint firstItem="mOz-uk-2gB" firstAttribute="top" secondItem="KWF-um-eJM" secondAttribute="bottom" constant="33" id="FN5-xK-ajH"/>
+                            <constraint firstItem="pu2-Q3-F3H" firstAttribute="centerX" secondItem="uHo-Fj-Z0E" secondAttribute="centerX" id="FVb-Wy-TbB"/>
+                            <constraint firstItem="mOz-uk-2gB" firstAttribute="centerX" secondItem="KWF-um-eJM" secondAttribute="centerX" id="PPY-3X-ygn"/>
+                            <constraint firstItem="pu2-Q3-F3H" firstAttribute="leading" secondItem="uHo-Fj-Z0E" secondAttribute="leadingMargin" constant="67" id="SGH-5G-DbA"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oh4-fx-OUE" secondAttribute="trailing" constant="8" id="kbV-er-UiU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="KWF-um-eJM" secondAttribute="trailing" constant="8" id="n73-z2-Fkh"/>
+                            <constraint firstItem="oh4-fx-OUE" firstAttribute="top" secondItem="pu2-Q3-F3H" secondAttribute="bottom" constant="61" id="rNj-2w-R8u"/>
+                            <constraint firstItem="KWF-um-eJM" firstAttribute="leading" secondItem="uHo-Fj-Z0E" secondAttribute="leadingMargin" constant="8" id="vVR-kY-YqH"/>
+                            <constraint firstItem="KWF-um-eJM" firstAttribute="top" secondItem="oh4-fx-OUE" secondAttribute="bottom" constant="32" id="wzT-EL-ETe"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nS7-Ag-Bdx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-48.75" y="-316.90140845070425"/>
+        </scene>
         <!--Map-->
         <scene sceneID="DA6-01-ngD">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="S0D-QC-9uN" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" image="icon_mapview-deselected" selectedImage="icon_mapview-deselected" id="jBa-qr-6Bh"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="icon_mapview-selected" selectedImage="icon_mapview-deselected" id="jBa-qr-6Bh"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="OKj-od-GZo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -132,7 +195,7 @@
         <scene sceneID="Vz9-hp-LVT">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MZo-vA-mYF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="List" image="icon_listview-deselected" selectedImage="icon_listview-deselected" id="4jk-B9-QOi"/>
+                    <tabBarItem key="tabBarItem" title="List" image="icon_listview-selected" selectedImage="icon_listview-deselected" id="4jk-B9-QOi"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="C8n-QA-vKJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -150,6 +213,9 @@
     </scenes>
     <resources>
         <image name="icon_listview-deselected" width="75" height="50"/>
+        <image name="icon_listview-selected" width="75" height="50"/>
         <image name="icon_mapview-deselected" width="75" height="50"/>
+        <image name="icon_mapview-selected" width="75" height="50"/>
+        <image name="logo-u" width="62" height="62"/>
     </resources>
 </document>
