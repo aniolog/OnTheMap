@@ -19,6 +19,14 @@ class Client {
     }
     
     
+    func sendError(_ error: String,code:Int,completionHandler: @escaping (_ result: Data?, _ error: NSError?)->Void) {
+        print(error)
+        let userInfo = [NSLocalizedDescriptionKey : error]
+        completionHandler(nil, NSError(domain: "get method", code: code, userInfo: userInfo))
+    }
+    
+    
+    
     func get (getUrl:String, getPath: String ,parameters: [String: AnyObject], headers: [String: String] ,completionHandler: @escaping (_ result: AnyObject?, _ error: NSError?)->Void) -> URLSessionDataTask{
     
         let url = prepareURL(host: getUrl, path: getPath, parameters: parameters)
@@ -60,35 +68,29 @@ class Client {
 
     
     
-    func post (getUrl:String, getPath: String ,parameters: [String: AnyObject], headers: [String: String],body:String,completionHandler: @escaping (_ result: AnyObject?, _ error: NSError?)->Void) -> URLSessionDataTask{
+    func post (getUrl:String, getPath: String ,parameters: [String: AnyObject], headers: [String: String],body:String,completionHandler: @escaping (_ result: Data?, _ error: NSError?)->Void) -> URLSessionDataTask{
         
         let url = prepareURL(host: getUrl, path: getPath, parameters: parameters)
         
+        print(body)
+        
         let request = prepareRequest(requestUrl: url, headers: headers, method: Client.requestConstants.verbs.post, body:body)
+        
         
         let task = URLSession.shared.dataTask(with: request){
             (data,response,error) in
             if error != nil {
-                self.sendError("the request has an error", completionHandler: completionHandler)
+                self.sendError("No connection with the server",code:0, completionHandler: completionHandler)
             }
             else{
                 
+                
                 guard let responseStatus: Int = (response as! HTTPURLResponse).statusCode, responseStatus>199 && responseStatus<=299 else{
-                    self.sendError("the resquest responde with a status greater than 299", completionHandler: completionHandler)
+                    self.sendError("the resquest responde with a status greater than 299",code:1, completionHandler: completionHandler)
                     return
                 }
-                
-                do {
-                    guard let responseData: AnyObject = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as AnyObject  else{
-                        self.sendError("unable to parse data", completionHandler: completionHandler)
-                        return
-                    }
-                    completionHandler(responseData,nil)
+                completionHandler(data,nil)
                     
-                }catch {
-                    self.sendError("unable to parse data", completionHandler: completionHandler)
-                    
-                }
             }
         }
         task.resume()
@@ -106,9 +108,10 @@ class Client {
         let task = URLSession.shared.dataTask(with: request){
             (data,response,error) in
             if error != nil {
-                self.sendError("the request has an error", completionHandler: completionHandler)
+                self.sendError("No connection with the server", completionHandler: completionHandler)
             }
             else{
+                
                 
                 guard let responseStatus: Int = (response as! HTTPURLResponse).statusCode, responseStatus>199 && responseStatus<=299 else{
                     self.sendError("the resquest responde with a status greater than 299", completionHandler: completionHandler)
@@ -131,29 +134,6 @@ class Client {
         task.resume()
         return task
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     func prepareURL(host: String, path: String, parameters: [String: AnyObject] )->URL{
         

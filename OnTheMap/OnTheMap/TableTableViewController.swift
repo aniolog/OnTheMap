@@ -19,6 +19,7 @@ class TableTableViewController: UIViewController,UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         table.delegate = self
+        prepareNavigationBarButtons()
     }
     
     override func viewWillAppear(_ animated: Bool) {

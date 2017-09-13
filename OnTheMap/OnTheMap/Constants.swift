@@ -40,6 +40,10 @@ extension Client{
                 static let appId  = "X-Parse-Application-Id"
                 static let apiKey = "X-Parse-REST-API-Key"
             }
+            struct udacity{
+                static let contentType = "Content-Type"
+                static let accept = "Accept"
+            }
             
         }
         struct headersValues {
@@ -47,7 +51,9 @@ extension Client{
                 static let appId = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
                 static let apiKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
             }
-            
+            struct udacity{
+                static let appJson = "application/json"
+            }
         }
         struct verbs {
             static let get    = "GET"
