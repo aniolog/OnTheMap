@@ -33,10 +33,16 @@ extension UIViewController{
         self.navigationItem.title = "On the map"
     }
 
-    func pinUser(){
     
+    func pinUser(){
+        let postLocationViewController = self.storyboard?.instantiateViewController(withIdentifier: "postLocation")
+        self.present(postLocationViewController!, animated: true, completion: nil)
     }
 
+    func closeModal(){
+        
+    
+    }
     
     func performLogOut(){
         self.dismiss(animated: true, completion: nil)

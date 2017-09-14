@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F0122521F6A20F500C55A7E /* PinLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0122511F6A20F500C55A7E /* PinLocationViewController.swift */; };
+		9F0122541F6A2F9D00C55A7E /* NamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0122531F6A2F9D00C55A7E /* NamesViewController.swift */; };
 		9F56774E1F68BF9D0013BFF9 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F56774D1F68BF9D0013BFF9 /* AuthViewController.swift */; };
 		9F5677501F68C3C10013BFF9 /* ViewControllerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F56774F1F68C3C10013BFF9 /* ViewControllerUtils.swift */; };
 		9F5677521F68C7160013BFF9 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5677511F68C7160013BFF9 /* AuthService.swift */; };
@@ -28,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9F0122511F6A20F500C55A7E /* PinLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinLocationViewController.swift; sourceTree = "<group>"; };
+		9F0122531F6A2F9D00C55A7E /* NamesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamesViewController.swift; sourceTree = "<group>"; };
 		9F56774D1F68BF9D0013BFF9 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		9F56774F1F68C3C10013BFF9 /* ViewControllerUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerUtils.swift; sourceTree = "<group>"; };
 		9F5677511F68C7160013BFF9 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
@@ -122,6 +126,8 @@
 				9F574E5F1F65D2E4004E95FE /* TableTableViewController.swift */,
 				9F56774D1F68BF9D0013BFF9 /* AuthViewController.swift */,
 				9F56774F1F68C3C10013BFF9 /* ViewControllerUtils.swift */,
+				9F0122511F6A20F500C55A7E /* PinLocationViewController.swift */,
+				9F0122531F6A2F9D00C55A7E /* NamesViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -227,10 +233,12 @@
 			files = (
 				9F574E601F65D2E4004E95FE /* TableTableViewController.swift in Sources */,
 				9F574E571F65931C004E95FE /* Constants.swift in Sources */,
+				9F0122521F6A20F500C55A7E /* PinLocationViewController.swift in Sources */,
 				9F574E3D1F658F1F004E95FE /* ViewController.swift in Sources */,
 				9F574E531F65927A004E95FE /* Student.swift in Sources */,
 				9F5677501F68C3C10013BFF9 /* ViewControllerUtils.swift in Sources */,
 				9F56774E1F68BF9D0013BFF9 /* AuthViewController.swift in Sources */,
+				9F0122541F6A2F9D00C55A7E /* NamesViewController.swift in Sources */,
 				9F574E621F65E021004E95FE /* OnTheMapAnnotation.swift in Sources */,
 				9F574E551F6592FB004E95FE /* Client.swift in Sources */,
 				9F574E3B1F658F1F004E95FE /* AppDelegate.swift in Sources */,

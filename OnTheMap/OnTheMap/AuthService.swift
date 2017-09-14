@@ -18,7 +18,7 @@ class AuthService{
 
 
     
-    func performLogin(username:String, password:String,completionHandler: @escaping (AnyObject?,NSError?)->Void){
+    func performLogin(username:String, password:String,completionHandler: @escaping (Data?,NSError?)->Void){
     
         let body = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}"
         
@@ -36,9 +36,27 @@ class AuthService{
                     completionHandler(nil,error)
                 }else{
                     let range = Range(5..<response!.count)
-                    let newData = response?.subdata(in: range) /* subset response data! */
-                    print(NSString(data: newData!, encoding: String.Encoding.utf8.rawValue)!)
-
+                    let newData = response?.subdata(in: range)
+                    
+                    do{
+                        let result = (try JSONSerialization.jsonObject(with: newData!, options: .allowFragments) as? [String: AnyObject])
+                        let session = result?["session"] as? [String : AnyObject]
+                        let id = session?["id"] as? String
+                        let cookieProps: [HTTPCookiePropertyKey : Any] = [
+                            HTTPCookiePropertyKey.path: "/",
+                            HTTPCookiePropertyKey.name: "XSRF-TOKEN",
+                            HTTPCookiePropertyKey.value: id,
+                        ]
+                        if let cookie = HTTPCookie(properties: cookieProps) {
+                            HTTPCookieStorage.shared.setCookie(cookie)
+                        }
+                        completionHandler(id?.data(using: .utf8), nil)
+                        
+                        
+                    }catch{
+                        let userInfo = [NSLocalizedDescriptionKey : "parse error"]
+                        completionHandler(nil, NSError(domain: "get method", code: 1, userInfo: userInfo))
+                    }
                     
                 }
             
@@ -48,7 +66,7 @@ class AuthService{
 
     func performLogout(){
     
-    
+        
     
     
     }

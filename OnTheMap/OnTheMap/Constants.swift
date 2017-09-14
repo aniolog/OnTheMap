@@ -43,6 +43,7 @@ extension Client{
             struct udacity{
                 static let contentType = "Content-Type"
                 static let accept = "Accept"
+                static let xsrfToken = "XSRF-TOKEN"
             }
             
         }

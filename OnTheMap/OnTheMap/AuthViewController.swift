@@ -28,32 +28,28 @@ class AuthViewController: UIViewController {
     }
 
     @IBAction func performLogin(_ sender: Any) {
-        let logedView = self.storyboard?.instantiateViewController(withIdentifier: "appRoot")
+        let logedViewControllert = self.storyboard?.instantiateViewController(withIdentifier: "appRoot")
         enableUI(status: false)
         service?.performLogin(username: usernameField.text!, password: passwordField.text!){
             (response,error) in
             
             DispatchQueue.main.async {
+                print("1")
                 self.enableUI(status: true)
                 if error != nil {
+                     print("2")
                     self.invalidCredentialsLabel.isHidden = false
                     if error?.code == 0 {
                         self.invalidCredentialsLabel.text = "Error: no internet connection"
                     }else{
                         self.invalidCredentialsLabel.text = "Error: invalid credential"
                     }
-                    
-                    
-                    
                 }else{
-                    self.present(logedView!, animated: true, completion: nil)
+                     print("3")
+                    self.present(logedViewControllert!, animated: true, completion: nil)
                 }
-               
             }
-
-        
         }
-        
     }
     
     func enableUI(status: Bool){

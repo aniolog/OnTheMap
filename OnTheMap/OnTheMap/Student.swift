@@ -11,7 +11,7 @@ import Foundation
 
 struct Student {
     
-    var objectID  : String
+    var objectID  : String?
     var uniqueKey : String?
     var firstName : String?
     var lastName  : String?
@@ -19,13 +19,13 @@ struct Student {
     var mediaURL  : String?
     var latitude  : Double?
     var longitude : Double?
-    var createdAt : String
-    var updatedAt : String
+    var createdAt : String?
+    var updatedAt : String?
     
     
     
     init(studentData : [String: AnyObject]) {
-        objectID  = studentData[Client.jsonKeys.studentkeys.objectID] as! String
+        objectID  = studentData[Client.jsonKeys.studentkeys.objectID] as? String
         uniqueKey = studentData[Client.jsonKeys.studentkeys.uniqueKey] as? String
         firstName = studentData[Client.jsonKeys.studentkeys.firstName] as? String
         lastName  = studentData[Client.jsonKeys.studentkeys.lastName] as? String
@@ -33,8 +33,7 @@ struct Student {
         mediaURL  = studentData[Client.jsonKeys.studentkeys.mediaURL] as? String
         latitude  = studentData[Client.jsonKeys.studentkeys.latitude] as? Double
         longitude = studentData[Client.jsonKeys.studentkeys.longitude] as? Double
-        createdAt = studentData[Client.jsonKeys.studentkeys.createdAt] as! String
-        updatedAt = studentData[Client.jsonKeys.studentkeys.updatedAt] as! String
+        createdAt = studentData[Client.jsonKeys.studentkeys.createdAt] as? String
+        updatedAt = studentData[Client.jsonKeys.studentkeys.updatedAt] as? String
     }
-
 }
