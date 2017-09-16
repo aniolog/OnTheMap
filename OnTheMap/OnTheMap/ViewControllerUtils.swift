@@ -10,7 +10,9 @@ import Foundation
 import UIKit
 
 extension UIViewController{
-
+    
+    
+    
     func prepareNavigationBarButtons(){
         //Mark: left button
         let leftButton = UIButton.init(type: .custom)
@@ -44,9 +46,35 @@ extension UIViewController{
     
     }
     
-    func performLogOut(){
-        self.dismiss(animated: true, completion: nil)
-    
+    func prepareActivityIndicator()-> UIActivityIndicatorView{
+        var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.addSubview(activityIndicator)
+        return activityIndicator
     }
-
+    
+    
+    func displayError(title:String, message:String, dismissMessage:String){
+        let alert = UIAlertController(title: title, message:message, preferredStyle: .alert)
+        let dismissAction = UIAlertAction(title: dismissMessage, style: .default){ action in
+            alert.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(dismissAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    func performLogOut(){
+        
+        let authService =  AuthService()
+        authService.performLogout(){
+            (response, error) in
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            
+        }
+    }
 }

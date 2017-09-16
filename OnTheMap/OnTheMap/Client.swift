@@ -1,4 +1,3 @@
-//
 //  Client.swift
 //  OnTheMap
 //
@@ -68,11 +67,17 @@ class Client {
 
     
     
-    func post (getUrl:String, getPath: String ,parameters: [String: AnyObject], headers: [String: String],body:String,completionHandler: @escaping (_ result: Data?, _ error: NSError?)->Void) -> URLSessionDataTask{
+    func post (postUrl:String, postPath: String ,parameters: [String: AnyObject], headers: [String: String],body:String,completionHandler: @escaping (_ result: Data?, _ error: NSError?)->Void) -> URLSessionDataTask{
         
-        let url = prepareURL(host: getUrl, path: getPath, parameters: parameters)
         
         print(body)
+        print(postUrl)
+        print(postPath)
+        print(parameters)
+        
+        
+        
+        let url = prepareURL(host: postUrl, path: postPath, parameters: parameters)
         
         let request = prepareRequest(requestUrl: url, headers: headers, method: Client.requestConstants.verbs.post, body:body)
         
@@ -84,7 +89,7 @@ class Client {
             }
             else{
                 
-                
+                print((response as! HTTPURLResponse).statusCode)
                 guard let responseStatus: Int = (response as! HTTPURLResponse).statusCode, responseStatus>199 && responseStatus<=299 else{
                     self.sendError("the resquest responde with a status greater than 299",code:1, completionHandler: completionHandler)
                     return
@@ -99,9 +104,9 @@ class Client {
     
     
     
-    func put (getUrl:String, getPath: String ,parameters: [String: AnyObject], headers: [String: String],body:String,completionHandler: @escaping (_ result: AnyObject?, _ error: NSError?)->Void) -> URLSessionDataTask{
+    func put (putUrl:String, putPath: String ,parameters: [String: AnyObject], headers: [String: String],body:String,completionHandler: @escaping (_ result: AnyObject?, _ error: NSError?)->Void) -> URLSessionDataTask{
         
-        let url = prepareURL(host: getUrl, path: getPath, parameters: parameters)
+        let url = prepareURL(host: putUrl, path: putPath, parameters: parameters)
         
         let request = prepareRequest(requestUrl: url, headers: headers, method: Client.requestConstants.verbs.put, body:body)
         
@@ -129,6 +134,29 @@ class Client {
                     self.sendError("unable to parse data", completionHandler: completionHandler)
                     
                 }
+            }
+        }
+        task.resume()
+        return task
+    }
+    
+    func delete(deleteUrl:String, deletePath: String ,parameters: [String: AnyObject], headers: [String: String] ,completionHandler: @escaping (_ result: Data?, _ error: NSError?)->Void) -> URLSessionDataTask{
+        
+        let url = prepareURL(host: deleteUrl, path: deletePath, parameters: parameters)
+        
+        let request = prepareRequest(requestUrl: url, headers: headers, method: Client.requestConstants.verbs.delete)
+        
+        let task = URLSession.shared.dataTask(with: request){
+             (data,response,error) in
+                if error != nil {
+                    self.sendError("No connection with the server",code:0, completionHandler: completionHandler)
+                }
+                else{
+                    guard let responseStatus: Int = (response as! HTTPURLResponse).statusCode, responseStatus>199 && responseStatus<=299 else{
+                        self.sendError("the resquest responde with a status greater than 299",code:1, completionHandler: completionHandler)
+                        return
+                    }
+                    completionHandler(data,nil)
             }
         }
         task.resume()

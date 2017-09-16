@@ -15,6 +15,13 @@ class StudentService {
     
     var client : Client
     
+    let headers = [
+        Client.requestConstants.headersKeys.parse.apiKey : Client.requestConstants.headersValues.parse.apiKey,
+        Client.requestConstants.headersKeys.parse.appId : Client.requestConstants.headersValues.parse.appId,
+        Client.requestConstants.headersKeys.parse.contentType: Client.requestConstants.headersValues.udacity.appJson
+    ]
+    
+    
     init() {
         client = Client()
     }
@@ -30,9 +37,6 @@ class StudentService {
         
         print(parameters)
         
-        let headers = [
-            Client.requestConstants.headersKeys.parse.apiKey : Client.requestConstants.headersValues.parse.apiKey,
-            Client.requestConstants.headersKeys.parse.appId : Client.requestConstants.headersValues.parse.appId]
         
         client.get(getUrl: Client.requestConstants.studentLocationBaseUrl,
                    getPath: Client.requestConstants.studentLocationPath,
@@ -62,11 +66,43 @@ class StudentService {
                             completionHandler(students, nil)
                         }
                 }
+        }
+    
+    
+    func postStudent(_ student :Student,completionHandler: @escaping (String?,NSError?)->Void){
+        
+        let parameters = [String: AnyObject]()
+        
+        
+        
+        
+        let studentBody =  "{\"uniqueKey\": \"1234\", \"firstName\": \"\(student.firstName!)\", \"lastName\": \"\(student.lastName!)\",\"mapString\": \"\(student.mapString!)\", \"mediaURL\": \"\(student.mediaURL!)\",\"latitude\": \(student.latitude!), \"longitude\": \(String(describing: student.longitude!))}"
+        
+        
+        client.post(postUrl: Client.requestConstants.studentLocationBaseUrl, postPath: Client.requestConstants.studentLocationPath, parameters: parameters, headers: headers, body: studentBody){
+            (response,error) in
+            
+            
+            if error != nil{
+                completionHandler(nil,error)
+            }else{
+                do{
+                    let response = try JSONSerialization.jsonObject(with: response!, options: .allowFragments) as! [String: AnyObject]
+                   // completionHandler("hola",nil)
+                    print(response)
+                }catch{
+                    
+                    completionHandler(nil,error as NSError)
+                }
+            }
+            
+        }
+    
     }
     
-    
-    
-    
-    
+    func putStudent(_ student :Student,completionHandler: @escaping (Student?,NSError?)->Void){
+        
+        
+    }
     
 }

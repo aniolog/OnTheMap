@@ -19,12 +19,14 @@ class AuthViewController: UIViewController {
     
     @IBOutlet weak var invalidCredentialsLabel: UILabel!
     
+    @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.invalidCredentialsLabel.isHidden = true
         service = AuthService()
-        // Do any additional setup after loading the view.
+        loginButton.layer.cornerRadius = 10
+        
     }
 
     @IBAction func performLogin(_ sender: Any) {
@@ -34,10 +36,8 @@ class AuthViewController: UIViewController {
             (response,error) in
             
             DispatchQueue.main.async {
-                print("1")
                 self.enableUI(status: true)
                 if error != nil {
-                     print("2")
                     self.invalidCredentialsLabel.isHidden = false
                     if error?.code == 0 {
                         self.invalidCredentialsLabel.text = "Error: no internet connection"
@@ -45,7 +45,8 @@ class AuthViewController: UIViewController {
                         self.invalidCredentialsLabel.text = "Error: invalid credential"
                     }
                 }else{
-                     print("3")
+                    self.usernameField.text = ""
+                    self.passwordField.text = ""
                     self.present(logedViewControllert!, animated: true, completion: nil)
                 }
             }
@@ -55,6 +56,7 @@ class AuthViewController: UIViewController {
     func enableUI(status: Bool){
         usernameField.isEnabled = status
         passwordField.isEnabled = status
+        loginButton.isEnabled = status
     }
     
 }

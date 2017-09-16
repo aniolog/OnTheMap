@@ -39,6 +39,8 @@ extension Client{
             struct parse{
                 static let appId  = "X-Parse-Application-Id"
                 static let apiKey = "X-Parse-REST-API-Key"
+                static let contentType = "Content-Type"
+                static let accept = "Accept"
             }
             struct udacity{
                 static let contentType = "Content-Type"
