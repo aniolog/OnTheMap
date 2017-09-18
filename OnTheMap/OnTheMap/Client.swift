@@ -63,6 +63,39 @@ class Client {
     
     
     
+   
+    
+    func getData (getUrl:String, getPath: String ,parameters: [String: AnyObject], headers: [String: String],completionHandler: @escaping (_ resultWithData: Data?, _ error: NSError?)->Void) -> URLSessionDataTask{
+        
+        print(getUrl)
+        print(getPath)
+        
+        let url = prepareURL(host: getUrl, path: getPath, parameters: parameters)
+        
+        let request = prepareRequest(requestUrl: url, headers: headers, method: Client.requestConstants.verbs.get)
+        
+        
+        let task = URLSession.shared.dataTask(with: request){
+            (data,response,error) in
+            if error != nil {
+                self.sendError("No connection with the server",code:0, completionHandler: completionHandler)
+            }
+            else{
+                print(error)
+                print((response as! HTTPURLResponse).statusCode)
+                guard let responseStatus: Int = (response as! HTTPURLResponse).statusCode, responseStatus>199 && responseStatus<=299 else{
+                    self.sendError("the resquest responde with a status greater than 299",code:1, completionHandler: completionHandler)
+                    return
+                }
+                completionHandler(data,nil)
+                
+            }
+        }
+        task.resume()
+        return task
+    }
+    
+    
     
 
     

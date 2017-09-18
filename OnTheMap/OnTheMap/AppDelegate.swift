@@ -16,14 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var students:[Student]?
     
     var service:StudentService?
-
     
-    func loadStudents(completionHandler: @escaping ([Student]?,NSError?)->Void){
+    var user:User?
+    
+    
+    func loadStudents(completionHandler: @escaping (NSError?)->Void){
        service = StudentService()
        service?.getStudentsPosition(){
             (students,error) in
             self.students = students
-            completionHandler(students,error)
+            completionHandler(error)
         
         }
         

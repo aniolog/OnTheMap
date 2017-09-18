@@ -73,6 +73,7 @@ class MapViewController: UIViewController,MKMapViewDelegate {
     }
     
     func createAllStudentAnnotations(_ students:[Student]){
+    
         for student in students{
             if student.latitude != nil && student.longitude != nil{
                 self.map.addAnnotation(OTMAnnotation(latitude: student.latitude!,longitude: student.longitude!,student: student))
@@ -85,17 +86,12 @@ class MapViewController: UIViewController,MKMapViewDelegate {
     func loadAllStudents(){
         self.map.removeAnnotations(self.map.annotations)
         delegate.loadStudents(){
-            (students, error) in
+            (error) in
             DispatchQueue.main.async {
                 if error != nil{
-                    let alert = UIAlertController(title: "Download failed", message:
-                        "the app failed to download the first 100 student", preferredStyle: .alert)
-                    let dismissAction = UIAlertAction(title: "Got it", style: .default){ action in}
-                    alert.addAction(dismissAction)
-                    self.present(alert, animated: true, completion: nil)
+                       self.displayError(title: "Download failed", message: "the app failed to download the first 100 students", dismissMessage: "Got it")
                 }else{
-                    self.students = students!
-                    self.createAllStudentAnnotations(self.students)
+                    self.createAllStudentAnnotations(self.delegate.students!)
                     
                 }
             }

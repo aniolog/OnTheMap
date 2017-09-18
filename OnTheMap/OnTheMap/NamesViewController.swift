@@ -8,8 +8,9 @@
 
 import UIKit
 
-class NamesViewController: UIViewController {
-
+class NamesViewController: UIViewController,UITextFieldDelegate {
+    var delegate = (UIApplication.shared.delegate) as! AppDelegate
+    
     @IBOutlet weak var firstName: UITextField!
     @IBOutlet weak var lastName: UITextField!
     @IBOutlet weak var location: UITextField!
@@ -21,12 +22,26 @@ class NamesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.nextButton.layer.cornerRadius = 10
+        firstName.delegate = self
+        lastName.delegate = self
+        location.delegate = self
+        url.delegate = self
+        
+        firstName.text = delegate.user?.firstName
+        lastName.text = delegate.user?.lastName
+        firstName.isEnabled = false
+        lastName.isEnabled = false
         
         // Do any additional setup after loading the view.
     }
 
     @IBAction func closeModal(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -41,9 +56,37 @@ class NamesViewController: UIViewController {
     }
     
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.unsubscribeFromKeyboardNotifications()
+    }
+    
+    
+    
     @IBAction func goToMapLocation(_ sender: Any) {
         
         self.performSegue(withIdentifier: "pinLocationSegue", sender: self)
+    }
+    
+    
+    func keyboardWillShow(_ notification:Notification) {
+        if UIDevice.current.orientation.isLandscape{
+            
+            view.frame.origin.y = 0 - getKeyboardHeight(notification)
+            
+        }else{
+            if(location.isEditing)||(url.isEditing){
+                
+                view.frame.origin.y = 0 - getKeyboardHeight(notification)
+            }
+        }
     }
 
 }

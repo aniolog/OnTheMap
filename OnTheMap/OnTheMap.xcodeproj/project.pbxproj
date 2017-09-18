@@ -13,7 +13,6 @@
 		9F5677501F68C3C10013BFF9 /* ViewControllerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F56774F1F68C3C10013BFF9 /* ViewControllerUtils.swift */; };
 		9F5677521F68C7160013BFF9 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5677511F68C7160013BFF9 /* AuthService.swift */; };
 		9F574E3B1F658F1F004E95FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F574E3A1F658F1F004E95FE /* AppDelegate.swift */; };
-		9F574E3D1F658F1F004E95FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F574E3C1F658F1F004E95FE /* ViewController.swift */; };
 		9F574E401F658F1F004E95FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F574E3E1F658F1F004E95FE /* Main.storyboard */; };
 		9F574E421F658F1F004E95FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F574E411F658F1F004E95FE /* Assets.xcassets */; };
 		9F574E451F658F1F004E95FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F574E431F658F1F004E95FE /* LaunchScreen.storyboard */; };
@@ -25,8 +24,8 @@
 		9F574E5E1F65D2BF004E95FE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F574E5D1F65D2BF004E95FE /* MapViewController.swift */; };
 		9F574E601F65D2E4004E95FE /* TableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F574E5F1F65D2E4004E95FE /* TableTableViewController.swift */; };
 		9F574E621F65E021004E95FE /* OnTheMapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F574E611F65E021004E95FE /* OnTheMapAnnotation.swift */; };
-		9F574E641F660AD5004E95FE /* OnTheMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F574E631F660AD5004E95FE /* OnTheMapTableViewCell.swift */; };
 		9F574E661F663706004E95FE /* OnTheMapInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F574E651F663706004E95FE /* OnTheMapInfoButton.swift */; };
+		9F5EB73F1F6F571900BA988F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5EB73E1F6F571900BA988F /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +36,6 @@
 		9F5677511F68C7160013BFF9 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		9F574E371F658F1F004E95FE /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F574E3A1F658F1F004E95FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9F574E3C1F658F1F004E95FE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9F574E3F1F658F1F004E95FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9F574E411F658F1F004E95FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9F574E441F658F1F004E95FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -50,8 +48,8 @@
 		9F574E5D1F65D2BF004E95FE /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		9F574E5F1F65D2E4004E95FE /* TableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableTableViewController.swift; sourceTree = "<group>"; };
 		9F574E611F65E021004E95FE /* OnTheMapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnTheMapAnnotation.swift; sourceTree = "<group>"; };
-		9F574E631F660AD5004E95FE /* OnTheMapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnTheMapTableViewCell.swift; sourceTree = "<group>"; };
 		9F574E651F663706004E95FE /* OnTheMapInfoButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnTheMapInfoButton.swift; sourceTree = "<group>"; };
+		9F5EB73E1F6F571900BA988F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,8 +90,6 @@
 				9F574E4D1F659211004E95FE /* Models */,
 				9F574E4C1F659205004E95FE /* Services */,
 				9F574E3A1F658F1F004E95FE /* AppDelegate.swift */,
-				9F574E411F658F1F004E95FE /* Assets.xcassets */,
-				9F574E431F658F1F004E95FE /* LaunchScreen.storyboard */,
 				9F574E461F658F1F004E95FE /* Info.plist */,
 			);
 			path = OnTheMap;
@@ -114,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				9F574E521F65927A004E95FE /* Student.swift */,
+				9F5EB73E1F6F571900BA988F /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -121,7 +118,6 @@
 		9F574E4E1F659218004E95FE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9F574E3C1F658F1F004E95FE /* ViewController.swift */,
 				9F574E5D1F65D2BF004E95FE /* MapViewController.swift */,
 				9F574E5F1F65D2E4004E95FE /* TableTableViewController.swift */,
 				9F56774D1F68BF9D0013BFF9 /* AuthViewController.swift */,
@@ -136,7 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				9F574E611F65E021004E95FE /* OnTheMapAnnotation.swift */,
-				9F574E631F660AD5004E95FE /* OnTheMapTableViewCell.swift */,
 				9F574E651F663706004E95FE /* OnTheMapInfoButton.swift */,
 			);
 			name = Views;
@@ -146,6 +141,8 @@
 			isa = PBXGroup;
 			children = (
 				9F574E3E1F658F1F004E95FE /* Main.storyboard */,
+				9F574E411F658F1F004E95FE /* Assets.xcassets */,
+				9F574E431F658F1F004E95FE /* LaunchScreen.storyboard */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -234,15 +231,14 @@
 				9F574E601F65D2E4004E95FE /* TableTableViewController.swift in Sources */,
 				9F574E571F65931C004E95FE /* Constants.swift in Sources */,
 				9F0122521F6A20F500C55A7E /* PinLocationViewController.swift in Sources */,
-				9F574E3D1F658F1F004E95FE /* ViewController.swift in Sources */,
 				9F574E531F65927A004E95FE /* Student.swift in Sources */,
+				9F5EB73F1F6F571900BA988F /* User.swift in Sources */,
 				9F5677501F68C3C10013BFF9 /* ViewControllerUtils.swift in Sources */,
 				9F56774E1F68BF9D0013BFF9 /* AuthViewController.swift in Sources */,
 				9F0122541F6A2F9D00C55A7E /* NamesViewController.swift in Sources */,
 				9F574E621F65E021004E95FE /* OnTheMapAnnotation.swift in Sources */,
 				9F574E551F6592FB004E95FE /* Client.swift in Sources */,
 				9F574E3B1F658F1F004E95FE /* AppDelegate.swift in Sources */,
-				9F574E641F660AD5004E95FE /* OnTheMapTableViewCell.swift in Sources */,
 				9F574E661F663706004E95FE /* OnTheMapInfoButton.swift in Sources */,
 				9F574E591F65B692004E95FE /* StudentService.swift in Sources */,
 				9F574E5E1F65D2BF004E95FE /* MapViewController.swift in Sources */,

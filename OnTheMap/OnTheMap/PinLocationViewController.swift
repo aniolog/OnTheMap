@@ -16,6 +16,8 @@ class PinLocationViewController: UIViewController {
     var geocoder: CLGeocoder?
     var activityIndicator: UIActivityIndicatorView?
     var service: StudentService?
+    var delegate: AppDelegate = (UIApplication.shared.delegate as! AppDelegate)
+    
     
     let completitionHandler = ()
     
@@ -65,7 +67,7 @@ class PinLocationViewController: UIViewController {
                 if error != nil{
                     self.displayError(title: "Error", message: "the app failed to post your location", dismissMessage: "Got it")
                 }else{
-                    
+                    self.delegate.students?.append(self.student!)
                     self.dismiss(animated: true, completion: nil)
                 }
             }

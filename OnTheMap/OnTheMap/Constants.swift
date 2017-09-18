@@ -69,6 +69,7 @@ extension Client{
         static let studentLocationPath = "/parse/classes/StudentLocation"
         static let authBaseUrl = "www.udacity.com"
         static let authPath = "/api/session"
+        static let userPath = "/api/users/"
         static let scheme = "https"
     }
 

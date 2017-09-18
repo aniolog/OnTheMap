@@ -7,13 +7,15 @@
 //
 
 import Foundation
-
+import UIKit
 
 class StudentService {
     
     
     
     var client : Client
+    
+    var delegate: AppDelegate = (UIApplication.shared.delegate as! AppDelegate)
     
     let headers = [
         Client.requestConstants.headersKeys.parse.apiKey : Client.requestConstants.headersValues.parse.apiKey,
@@ -31,7 +33,7 @@ class StudentService {
         
         let parameters = [
             Client.requestConstants.parseUrlParamKeys.limit : "100" as AnyObject,
-            Client.requestConstants.parseUrlParamKeys.orderBy: "-\(Client.jsonKeys.studentkeys.createdAt)" as AnyObject
+            Client.requestConstants.parseUrlParamKeys.orderBy: "-\(Client.jsonKeys.studentkeys.updatedAt)" as AnyObject
         
         ]
         
@@ -63,6 +65,7 @@ class StudentService {
                                     }
                                 }
                             }
+                            self.delegate.students = students
                             completionHandler(students, nil)
                         }
                 }
@@ -88,8 +91,7 @@ class StudentService {
             }else{
                 do{
                     let response = try JSONSerialization.jsonObject(with: response!, options: .allowFragments) as! [String: AnyObject]
-                   // completionHandler("hola",nil)
-                    print(response)
+                    completionHandler(response["objectId"] as! String,nil)
                 }catch{
                     
                     completionHandler(nil,error as NSError)

@@ -7,18 +7,19 @@
 //
 
 import Foundation
+import UIKit
 
 class AuthService{
 
     var client: Client?
     
+    var delegate: AppDelegate = (UIApplication.shared.delegate as! AppDelegate)
+    
     init() {
         self.client = Client()
     }
-
-
     
-    func performLogin(username:String, password:String,completionHandler: @escaping (Data?,NSError?)->Void){
+    func performLogin(username:String, password:String,completionHandler: @escaping (NSError?)->Void){
     
         let body = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}"
         
@@ -32,8 +33,13 @@ class AuthService{
         client?.post(postUrl: Client.requestConstants.authBaseUrl, postPath: Client.requestConstants.authPath, parameters: parameters, headers: headers, body: body){
                 (response,error) in
             
+                func prepareError(errorMessage: String){
+                    let userInfo = [NSLocalizedDescriptionKey : "parse error: \(errorMessage)"]
+                    completionHandler(NSError(domain: "get method", code: 1, userInfo: userInfo))
+                }
+            
                 if error != nil {
-                    completionHandler(nil,error)
+                    completionHandler(error)
                 }else{
                     let range = Range(5..<response!.count)
                     let newData = response?.subdata(in: range)
@@ -41,26 +47,28 @@ class AuthService{
                     do{
                         let result = (try JSONSerialization.jsonObject(with: newData!, options: .allowFragments) as? [String: AnyObject])
                         let session = result?["session"] as? [String : AnyObject]
-                        guard let id = session?["id"] as? String else{
-                            let userInfo = [NSLocalizedDescriptionKey : "parse error"]
-                            completionHandler(nil, NSError(domain: "get method", code: 1, userInfo: userInfo))
+                        let account = result?["account"] as? [String : AnyObject]
+                        print(result)
+                        
+                        guard let sessionId = session?["id"] as? String else{
+                            prepareError(errorMessage: "unable to find id in the response")
                             return
                         }
-                        let cookieProps: [HTTPCookiePropertyKey : Any] = [
-                            HTTPCookiePropertyKey.path: "/",
-                            HTTPCookiePropertyKey.name: "XSRF-TOKEN",
-                            HTTPCookiePropertyKey.value: id ?? "",
-                        ]
-                        print(id)
-                        if let cookie = HTTPCookie(properties: cookieProps) {
-                            HTTPCookieStorage.shared.setCookie(cookie)
+                        
+                        guard let key = account?["key"] as? String else{
+                            prepareError(errorMessage: "unable to find key in the response")
+                            return
                         }
-                        completionHandler(id.data(using: .utf8), nil)
+                     
+                        self.getUserData(sessionId: sessionId, userId: key){
+                            (error) in
+                            completionHandler(nil)
+                            
+                        }
                         
                         
                     }catch{
-                        let userInfo = [NSLocalizedDescriptionKey : "parse error"]
-                        completionHandler(nil, NSError(domain: "get method", code: 1, userInfo: userInfo))
+                        prepareError(errorMessage: "response is not a parsable json")
                     }
                     
                 }
@@ -116,6 +124,65 @@ class AuthService{
     
     }
 
+    func getUserData(sessionId: String ,userId: String, completitionHandler: @escaping (NSError?)->Void){
+       
+        let path = "\(Client.requestConstants.userPath)\(userId)"
+        let parameters = [String: AnyObject]()
+        let headers = [String:String]()
+  
+        client?.getData(getUrl: Client.requestConstants.authBaseUrl, getPath: path, parameters: parameters, headers: headers){
+            (data,error) in
+            
+            func prepareError(errorMessage: String){
+                let userInfo = [NSLocalizedDescriptionKey : "parse error: \(errorMessage)"]
+                completitionHandler(NSError(domain: "get method", code: 1, userInfo: userInfo))
+            }
+            
+            do {
+                
+                let range = Range(5..<data!.count)
+                let newData = data?.subdata(in: range)
+                
+                guard let response = try JSONSerialization.jsonObject(with: newData!, options: .allowFragments) as? [String:AnyObject] else{
+                    prepareError(errorMessage: "response not in json format")
+                    return
+                }
+
+                guard let userInfo = response["user"] as? [String:AnyObject] else{
+                     prepareError(errorMessage: "unable to find user in response")
+                    return
+                }
+
+                guard let firstName: String = userInfo["first_name"] as? String else{
+                     prepareError(errorMessage: "unable to find first_name in response")
+                    return
+                }
+
+                guard let lastName: String = userInfo["last_name"] as? String  else{
+                    prepareError(errorMessage: "unable to find last_name in response")
+                    return
+                }
+
+                self.delegate.user = User(firstName,lastName)
+        
+                
+                let cookieProps: [HTTPCookiePropertyKey : Any] = [
+                    HTTPCookiePropertyKey.path: "/",
+                    HTTPCookiePropertyKey.name: "XSRF-TOKEN",
+                    HTTPCookiePropertyKey.value: sessionId ?? "",
+                    ]
+                if let cookie = HTTPCookie(properties: cookieProps) {
+                    HTTPCookieStorage.shared.setCookie(cookie)
+                }
+                
+                completitionHandler(nil)
+            }catch{
+            
+            }
+            
+        
+        }
+    }
 
 
 
